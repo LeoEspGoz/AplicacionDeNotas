@@ -21,7 +21,7 @@ import androidx.navigation.NavController
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 
-fun SecondScreen(navController: NavController){
+fun SecondScreen(navController: NavController) {
     Scaffold {
         SecondBodyContent(navController)
     }
@@ -30,7 +30,7 @@ fun SecondScreen(navController: NavController){
 @Composable
 fun SecondBodyContent(
     navController: NavController
-    ) {
+) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Bottom,
@@ -41,10 +41,14 @@ fun SecondBodyContent(
         }) {
             Text("Atras")
         }
+        Button(onClick = {}){
+            Text("Nuevo recordatorio")
+        }
     }
 }
+
 @Composable
-fun DataPicker(){
-    
+fun DataPicker() {
+
 }
 

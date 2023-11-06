@@ -23,7 +23,13 @@ fun NotasCard() {
     val notas = listOf(
         "Nota 1: Esta es la primera nota.",
         "Nota 2: Aquí tienes otra nota.",
-        "Nota 3: Una tercera nota para mostrar."
+        "Nota 3: Papas con queso para desayunar",
+        "Nota 4: Tarea de Movil",
+        "Nota 5: Contraseñas guardadas importantes",
+        "Nota 6: Enviar Documento",
+        "Nota 7: If there is light",
+        "Nota 8: Https://youtube.com"
+
         // Agrega más notas según sea necesario
     )
 
