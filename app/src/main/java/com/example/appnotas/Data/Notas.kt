@@ -1,4 +1,4 @@
 package com.example.appnotas.Data
 
-@E
+@Entity
 data class Notas()
