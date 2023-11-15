@@ -1,119 +1,96 @@
 package com.example.appnotas.Screens
 
-import android.os.Bundle
-import android.widget.Toast
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Button
+
+import android.annotation.SuppressLint
+import android.app.DatePickerDialog
+import android.icu.util.Calendar
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.example.appnotas.ui.theme.AppNotasTheme
-import com.example.appnotas.MaterialDialog
-import com.example.appnotas.datetime.date.datepicker
-import com.example.appnotas.datetime.time.timepicker
-import com.example.appnotas.rememberMaterialDialogState
-import java.time.LocalDate
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
+import androidx.navigation.NavController
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            AppNotasTheme {
-                var pickedDate by remember {
-                    mutableStateOf(LocalDate.now())
-                }
-                var pickedTime by remember {
-                    mutableStateOf(LocalTime.NOON)
-                }
-                val formattedDate by remember {
-                    derivedStateOf {
-                        DateTimeFormatter
-                            .ofPattern("MMM dd yyyy")
-                            .format(pickedDate)
-                    }
-                }
-                val formattedTime by remember {
-                    derivedStateOf {
-                        DateTimeFormatter
-                            .ofPattern("hh:mm")
-                            .format(pickedTime)
-                    }
-                }
+@OptIn(ExperimentalMaterial3Api::class)
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@Composable
+fun ThirdScreen(navController: NavController){
+    Scaffold {
+        ThirdBodyContent(navController)
 
-                val dateDialogState = rememberMaterialDialogState()
-                val timeDialogState = rememberMaterialDialogState()
-
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Button(onClick = {
-                        dateDialogState.show()
-                    }) {
-                        Text(text = "Selecciona Fecha")
-                    }
-                    Text(text = formattedDate)
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Button(onClick = {
-                        timeDialogState.show()
-                    }) {
-                        Text(text = "Selecciona Hora")
-                    }
-                    Text(text = formattedTime)
-                }
-                MaterialDialog(
-                    dialogState = dateDialogState,
-                    buttons = {
-                        positiveButton(text = "Listo") {
-                            Toast.makeText(
-                                applicationContext,
-                                "Pesionaste Listo",
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-                        negativeButton(text = "Cancelar")
-                    }
-                ) {
-                    datepicker(
-                        initialDate = LocalDate.now(),
-                        title = "Selecciona una Fecha",
-                        allowedDateValidator = {
-                            it.dayOfMonth % 2 == 1
-                        }
-                    ) {
-                        pickedDate = it
-                    }
-                }
-                MaterialDialog(
-                    dialogState = timeDialogState,
-                    buttons = {
-                        positiveButton(text = "Listo") {
-                            Toast.makeText(
-                                applicationContext,
-                                "Presionaste Listo",
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-                        negativeButton(text = "Cancelar")
-                    }
-                ) {
-                    timepicker(
-                        initialTime = LocalTime.NOON,
-                        title = "Selecciona una Hora",
-                        timeRange = LocalTime.MIDNIGHT..LocalTime.NOON
-                    ) {
-                        pickedTime = it
-                    }
-                }
-            }
-        }
     }
+
 }
+@Composable
+fun ThirdBodyContent(
+    navController: NavController
+
+){
+    Column {
+       DatePicker()
+    }
+
+
+}
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DatePicker(){
+  var fecha by rememberSaveable { mutableStateOf("") }
+    val anio: Int
+    val mes: Int
+    val dia: Int
+    val nCalendar= Calendar.getInstance()
+    anio = nCalendar.get(Calendar.YEAR)
+    mes = nCalendar.get(Calendar.MONTH)
+    dia = nCalendar.get(Calendar.DAY_OF_MONTH)
+
+    val nDatePickerDialog = DatePickerDialog(
+        LocalContext.current,
+        { _Datepicker, anio:Int, mes:Int, dia:Int->
+            fecha = "$dia/${mes-1}/$anio"
+        },anio,mes,dia
+    )
+    Box(modifier = Modifier.fillMaxWidth()){
+        Row(modifier = Modifier.align(Alignment.Center)){
+            OutlinedTextField(
+                value = fecha,
+                onValueChange= {fecha = it},
+                readOnly = true,
+                label = { Text(text = "Select Date")}
+            )
+            Icon(
+                imageVector = Icons.Filled.DateRange,
+                contentDescription = null,
+                modifier = Modifier
+                    .size(48.dp)
+                    .padding(4.dp)
+                    .clickable {
+                        nDatePickerDialog.show()
+                    }
+            )
+        }
+
+  }
+}
+
+
+
+

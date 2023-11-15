@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import com.example.appnotas.Navegation.AppScreens
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
@@ -41,14 +42,12 @@ fun SecondBodyContent(
         }) {
             Text("Atras")
         }
-        Button(onClick = {}){
+        Button(onClick = {
+            navController.navigate(route = AppScreens.ThirdScreen.route) })
+        {
             Text("Nuevo recordatorio")
         }
     }
 }
 
-@Composable
-fun DataPicker() {
-
-}
 

@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.appnotas.Componentes.NotasCard
@@ -67,7 +68,7 @@ fun BodyContent(navController: NavController) {
                 isTextFieldVisible = true
             }
         ) {
-            Text("Agregar Nota")
+            Text("Agregar Nota", fontWeight = FontWeight.Bold)
         }
 
         Button(
@@ -79,4 +80,10 @@ fun BodyContent(navController: NavController) {
         }
     }
 }
+
+@Composable
+fun AddNote(){
+
+}
+
 
