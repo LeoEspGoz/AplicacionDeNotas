@@ -6,12 +6,16 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.room.Room
+import com.example.appnotas.Data.Notas
 import com.example.appnotas.Navegation.AppNavigation
-import com.example.appnotas.Screens.FirstScreen
+import com.example.appnotas.Navegation.AppScreens
+import com.example.appnotas.Room.NotasDatabase
+import com.example.appnotas.ViewModels.notasViewModel
+
 import com.example.appnotas.ui.theme.AppNotasTheme
 
 class MainActivity : ComponentActivity() {
@@ -24,7 +28,12 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    AppNavigation()
+                    val database = Room.databaseBuilder(this, NotasDatabase::class.java,"db_notas").build()
+                    val dao= database.notasDao()
+
+                    val viewModel= notasViewModel(dao)
+
+                    AppNavigation(viewModel= viewModel)
                 }
             }
         }
@@ -36,6 +45,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     AppNotasTheme {
-        AppNavigation()
+
     }
 }
