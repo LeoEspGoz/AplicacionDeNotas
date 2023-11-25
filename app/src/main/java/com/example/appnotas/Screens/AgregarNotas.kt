@@ -88,7 +88,7 @@ fun contentAgregarView(it: PaddingValues, navController: NavController,viewModel
                .padding(bottom = 15.dp)
        )
        Button(onClick = {
-           val nota= Notas(Titulo= titulo, Descripcion= descripcion)
+           val nota= Notas(titulo= titulo, descripcion = descripcion)
            viewModel.agregarNota(nota)
            navController.popBackStack()
 

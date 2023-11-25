@@ -45,6 +45,5 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     AppNotasTheme {
-
     }
 }

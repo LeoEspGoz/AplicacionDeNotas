@@ -95,9 +95,9 @@ fun ContentNotasList(it: PaddingValues, navController: NavController, viewModel:
                             .padding(18.dp)
 
                     ) {
-                        Text(text= it.Titulo)
-                        Text(text=it.Descripcion)
-                        IconButton(onClick = {navController.navigate("editar/${it.id}/${it.Titulo}/${it.Descripcion}")}) {
+                        Text(text= it.titulo)
+                        Text(text=it.descripcion)
+                        IconButton(onClick = {navController.navigate("editar/${it.id}/${it.titulo}/${it.descripcion}")}) {
                             Icon(imageVector = Icons.Default.Edit, contentDescription = "Editar" )
                         }
                         IconButton(

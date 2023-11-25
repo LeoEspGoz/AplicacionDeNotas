@@ -13,7 +13,7 @@ interface NotasDatabaseDao {
     @Query("Select * From notas")
     fun obtenerNotas(): Flow<List<Notas>>
     @Query("Select * From notas where id= id")
-    fun obtenerNota(id : Int): Flow<Notas>
+    fun editarNota(id : Int): Flow<Notas>
 
     @Insert
     suspend fun agregarNotas(nota: Notas)

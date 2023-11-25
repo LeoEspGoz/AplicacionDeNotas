@@ -61,12 +61,12 @@ fun EditarNotas(navController: NavController, viewModel: notasViewModel, id: Int
             )
         }
     ) {
-        contentEditarView(it, navController, viewModel, id, titulo, descripcion)
+        ContentEditarView(it, navController, viewModel, id, titulo, descripcion)
     }
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun contentEditarView(it: PaddingValues, navController: NavController, viewModel: notasViewModel, id: Int, titulo: String?,descripcion: String?){
+fun ContentEditarView(it: PaddingValues, navController: NavController, viewModel: notasViewModel, id: Int, titulo: String?,descripcion: String?){
     var titulo by remember{ mutableStateOf(titulo) }
     var descripcion by remember { mutableStateOf(descripcion) }
 
@@ -94,7 +94,7 @@ fun contentEditarView(it: PaddingValues, navController: NavController, viewModel
                 .padding(bottom = 15.dp)
         )
         Button(onClick = {
-            val nota= Notas(id= id, Titulo= titulo!!, Descripcion= descripcion!!)
+            val nota= Notas(id= id, titulo= titulo!!, descripcion= descripcion!!)
             viewModel.actualizarNota(nota)
             navController.popBackStack()
 
