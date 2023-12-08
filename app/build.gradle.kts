@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId = "com.example.appnotas"
         minSdk = 21
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -81,8 +81,4 @@ android {
             ksp("androidx.room:room-compiler:2.6.0")
         }
     }
-}
-dependencies {
-    implementation("androidx.room:room-common:2.6.0")
-    implementation("androidx.room:room-ktx:2.6.0")
 }

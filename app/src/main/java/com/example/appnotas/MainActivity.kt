@@ -18,8 +18,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
-import com.example.appnotas.Navegation.AppNavigation
-import com.example.appnotas.Room.NotasDatabase
 import com.example.appnotas.ViewModels.NotesViewModel
 import com.example.appnotas.data.NotesDataBase
 import com.example.appnotas.screens.AddNoteScreen
